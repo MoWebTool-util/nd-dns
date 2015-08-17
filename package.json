@@ -1,0 +1,30 @@
+{
+  "name": "nd-dns",
+  "version": "1.0.0",
+  "description": "drag and sort",
+  "keywords": [],
+  "homepage": "https://github.com/ndfront/nd-dns",
+  "author": {
+    "name": "crossjs",
+    "email": "liwenfu@crossjs.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ndfront/nd-dns.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ndfront/nd-dns/issues"
+  },
+  "licenses": "MIT",
+  "devDependencies": {},
+  "spm": {
+    "main": "index.js",
+    "dependencies": {
+      "jquery": "1.11.1",
+      "nd-base": "0.0.1"
+    },
+    "devDependencies": {
+      "expect.js": "0.3.1"
+    }
+  }
+}
