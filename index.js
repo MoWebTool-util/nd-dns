@@ -325,6 +325,8 @@ function executeDragEnterLeaveOver() {
     }
 
     if (action) {
+      dataTransfer.action = action;
+      dataTransfer.drop = drop;
       placeholder[action](drop);
     }
   }
@@ -359,7 +361,8 @@ function executeDrop() {
     return;
   }
 
-  dns.trigger('drop', dataTransfer, element, drop);
+  // dataTransfer.drop是真正要替换位置的drop
+  dns.trigger('drop', dataTransfer, element, dataTransfer.drop);
 }
 
 /*
@@ -372,6 +375,10 @@ function executeRevert() {
     element.insertAfter(placeholder);
   }
 
+  if (elementStyle.position !== 'absolute') {
+    elementStyle.left = 0;
+    elementStyle.top = 0;
+  }
   element.css(elementStyle);
   element = null;
   elementStyle = null;
@@ -431,6 +438,10 @@ function handleEvent(event) {
     case 'mouseup':
       // 点击而非拖放时
       if (dragPre === true) {
+        if (elementStyle !== 'absolute') {
+          elementStyle.left = 0;
+          elementStyle.top = 0;
+        }
         element.css(elementStyle);
         element = null;
         placeholder.remove();
@@ -511,6 +522,34 @@ DnS = Base.extend({
       // 在源节点上存储dns uid
       $(elem).data('dns', this.uid);
     }
+  },
+  addDrop: function(elem) {
+    var drops = this.get('drops');
+    if (elem) {
+      drops.push(elem);
+    }
+  },
+  removeDrop: function(elem) {
+    var drops = this.get('drops');
+    var len = drops.length;
+    var i = 0;
+    for(i=0; i<len; i++) {
+      if (drops[i] == elem) {
+        break;
+      }
+    }
+    // 删除
+    drops.splice(i, 1);
+  },
+  destroy: function() {
+    $(document).off('mousedown mousemove mouseup', handleEvent);
+    dnsArray = []; // 存储dns instance的数组
+    dns = null; // 当前拖放的dns对象
+    element = null; // 当前拖放元素
+    elementStyle = null; // 当前拖放元素的原始样式
+    placeholder = null; // 当前占位元素
+    drop = null; // 当前可放置容器  note. drops则为设置的可放置容器
+    dataTransfer = {}; // 存储拖放信息，在dragstart可设置，在drop中可读取
   }
 });
 
