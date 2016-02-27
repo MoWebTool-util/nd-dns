@@ -1,6 +1,6 @@
 {
   "name": "nd-dns",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "drag and sort",
   "keywords": [],
   "homepage": "https://github.com/ndfront/nd-dns",
@@ -22,8 +22,8 @@
   "licenses": "MIT",
   "main": "index.js",
   "dependencies": {
-    "jquery": "^1.11.1",
-    "nd-base": "^3.0.0"
+    "nd-base": "^3.0.1",
+    "nd-jquery": "^2.2.1"
   },
   "devDependencies": {
     "expect.js": "^0.3.1",

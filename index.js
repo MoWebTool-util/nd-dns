@@ -8,7 +8,7 @@
 var DnS = null;
 
 // 依赖组件
-var $ = require('jquery');
+var $ = require('nd-jquery');
 var Base = require('nd-base');
 
 var dnsArray = []; // 存储dns instance的数组
