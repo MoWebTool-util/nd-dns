@@ -557,6 +557,7 @@ DnS = Base.extend({
  * 开启页面DnS功能，绑定鼠标按下、移动、释放事件
  */
 DnS.open = function() {
+  DnS.close();
   $(document).on('mousedown mousemove mouseup', handleEvent);
 };
 
